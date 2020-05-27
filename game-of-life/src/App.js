@@ -1,23 +1,18 @@
 import React from 'react';
+import { Route, Link } from 'react-router-dom';
+
+import Grid from './components/Grid';
+import Landing from './components/Landing';
 
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+        <Route exact path="/" component={Landing}/>
+        <Route path="/grid" component={Grid} />
+
     </div>
   );
 }
