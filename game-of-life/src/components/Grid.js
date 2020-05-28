@@ -1,20 +1,13 @@
-import  React, { useState, useEffect, useCallback, useRef} from 'react';
+import  React, { useState, useCallback, useRef} from 'react';
+import { Link } from 'react-router-dom';
+
+import { InsideContainer, ContentBorder, ContentContainer, Buttons } from '../styles';
+
 import produce from 'immer';
 
-import styled from 'styled-components'
-
-const Container = styled.div`
-    display: flex;
-    background-color: white;
-`
-
-const ButtonBox = styled.div`
-    display: flex;
-`
-
 // number of rows and columns in grid
-const numRows = 50;
-const numCols = 50;
+const numRows = 30;
+const numCols = 30;
 
 // determining neighbors
 const operations = [
@@ -43,6 +36,9 @@ function Grid() {
         return generateEmptyGrid();
     });
     
+
+    const [color, setColor] = useState();
+
     // set running state
     const [running, setRunning] = useState(false);
     
@@ -82,16 +78,27 @@ function Grid() {
         setTimeout(runSimulation, 100);
     }, []);
 
-
-
-
     return(
-        <Container>
-        
+        <InsideContainer>
+    
+        <Link to='inside'>
+            <button
+                style={{
+                    marginBottom: ".5rem"
+                }}
+                >
+                Back
+            </button>
+        </Link>
+
+        <ContentBorder className="grid">
+        <ContentContainer>
         <div
             style={{
             display: "grid",
-            gridTemplateColumns: `repeat(${numCols}, 20px)`
+            gridTemplateColumns: `repeat(${numCols}, 15px)`,
+            border: "1px solid #111111",
+            marginTop: "2.5rem",
             }}
         >
             {grid.map((rows, i) =>
@@ -105,39 +112,44 @@ function Grid() {
                     setGrid(newGrid);
                 }}
                 style={{
-                    width: 20,
-                    height: 20,
+                    width: 15,
+                    height: 15,
                     backgroundColor: grid[i][k] ? "pink" : undefined,
-                    border: "solid 1px black"
+                    border: "solid 1px #555555",
+                    borderRadius: "5px"
                 }}
                 />
             ))
             )}
         </div>
 
-        <ButtonBox>
-        <button
-            onClick={() => {
-            setRunning(!running);
-            if (!running) {
-                runningRef.current = true;
-                runSimulation();
-            }
-            }}
-        >
-            {running ? "Stop" : "Start"}
-        </button>
+            <Buttons>
+                <button
+                    onClick={() => {
+                    setRunning(!running);
+                    if (!running) {
+                        runningRef.current = true;
+                        runSimulation();
+                    }
+                    }}
+                >
+                    {running ? "Stop" : "Start"}
+                </button>
+                <p>
+                    Generation:
+                </p>
+                <button
+                    onClick={() => {
+                    setGrid(generateEmptyGrid());
+                    }}
+                >
+                    Clear
+                </button>
+            </Buttons>
 
-        <button
-            onClick={() => {
-            setGrid(generateEmptyGrid());
-            }}
-        >
-            Clear
-        </button>
-
-        </ButtonBox>
-        </Container>
+            </ContentContainer>
+            </ContentBorder>
+        </InsideContainer>
     )
 } 
 

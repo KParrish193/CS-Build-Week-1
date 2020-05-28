@@ -44,7 +44,7 @@ const Doughnut = styled.button`
 `
 
 
-function Buttons() {
+function Presets() {
     return(
         <Container>
             <Umbrella> Umbrella </Umbrella>
@@ -57,8 +57,11 @@ function Buttons() {
             <Vanya> 7: Vanya </Vanya>
             <Hazel> Hazel </Hazel>
             <ChaCha> Cha Cha </ChaCha>
+            <button>
+                Random
+            </button>
         </Container>
     )
 }
 
-export default Buttons
+export default Presets
