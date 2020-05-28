@@ -133,18 +133,26 @@ export const ButtonsGrid = styled.div`
     border: #A74104 solid 2px;
     border-radius: 10px;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     flex-wrap: wrap;
     padding: .3rem;
     margin-top: .5rem;
     margin-bottom: 0;
     min-width: 510px;
     background-color: #EDFFED;
-    
+`
+
+export const ButtonsRows = styled.div`
+    width: 85%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+
     button {
         width: 6rem;
         padding: .3rem;
         font-size: 1.2rem;
-        margin: .3rem .15rem;
+        margin: .3rem 0rem .3rem 1.5rem;
     }
 `

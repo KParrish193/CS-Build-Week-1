@@ -1,7 +1,7 @@
 import  React, { useState, useCallback, useRef} from 'react';
 import { Link } from 'react-router-dom';
 
-import { InsideContainer, ContentBorder, ContentContainer, ButtonsGrid, Buttons, GridBackground } from '../styles';
+import { InsideContainer, ContentBorder, ContentContainer, ButtonsGrid, Buttons, GridBackground, ButtonsRows } from '../styles';
 
 import produce from 'immer';
 
@@ -35,7 +35,14 @@ function Grid() {
     const [grid, setGrid] = useState(() => {
         return generateEmptyGrid();
     });
+
+    //set speed state
+    const [speed, setSpeed] = useState(100)
     
+    // set speed reference for sim
+    const speedRef = useRef(speed);
+        speedRef.current = speed;
+
     // set running state
     const [running, setRunning] = useState(false);
     
@@ -43,7 +50,7 @@ function Grid() {
     const runningRef = useRef(running);
         runningRef.current = running;
 
-
+    // function for running simulation
     const runSimulation = useCallback(() => {
         if (!runningRef.current) {
             return;
@@ -72,7 +79,7 @@ function Grid() {
             });
         });
     
-        setTimeout(runSimulation, 100);
+        setTimeout(runSimulation, speedRef.current );
     }, []);
 
     return(
@@ -91,8 +98,11 @@ function Grid() {
         <ContentBorder className="grid">
         <ContentContainer className="inner">
         
-        <h3>Presets</h3>
+        
         <ButtonsGrid>
+        
+        <ButtonsRows>
+        <h3>Presets: </h3>
             <button
                 onClick={() => {
                 const rows = [];
@@ -106,8 +116,27 @@ function Grid() {
             >
             Random
             </button>
-            <button> Stuff </button>
-            <button>Something</button>
+
+        
+        </ButtonsRows>
+            <ButtonsRows>
+            <h3>Speed: </h3>
+                <button
+                    onClick={() => {
+                        setSpeed(1000);
+                        }}
+                > Slow </button>
+                <button
+                    onClick={() => {
+                        setSpeed(100);
+                        }}
+                > Normal </button>
+                <button
+                    onClick={() => {
+                    setSpeed(10);
+                    }}
+                >Fast</button>
+            </ButtonsRows>
         </ButtonsGrid>
 
         <GridBackground>
