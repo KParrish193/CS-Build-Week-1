@@ -30,7 +30,6 @@ const Container = styled.div`
             background-color: #F7DB91;
             font-family: 'Bangers', cursive;
         }
-
 `
 
 function Landing() {

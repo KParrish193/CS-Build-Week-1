@@ -1,12 +1,12 @@
 import  React, { useState, useCallback, useRef} from 'react';
 import { Link } from 'react-router-dom';
 
-import { InsideContainer, ContentBorder, ContentContainer, Buttons } from '../styles';
+import { InsideContainer, ContentBorder, ContentContainer, ButtonsGrid, Buttons, GridBackground } from '../styles';
 
 import produce from 'immer';
 
 // number of rows and columns in grid
-const numRows = 30;
+const numRows = 25;
 const numCols = 30;
 
 // determining neighbors
@@ -36,9 +36,6 @@ function Grid() {
         return generateEmptyGrid();
     });
     
-
-    const [color, setColor] = useState();
-
     // set running state
     const [running, setRunning] = useState(false);
     
@@ -92,13 +89,33 @@ function Grid() {
         </Link>
 
         <ContentBorder className="grid">
-        <ContentContainer>
+        <ContentContainer className="inner">
+        
+        <h3>Presets</h3>
+        <ButtonsGrid>
+            <button
+                onClick={() => {
+                const rows = [];
+                for (let i = 0; i < numRows; i++) {
+                    rows.push(
+                    Array.from(Array(numCols), () => (Math.random() > 0.7 ? 1 : 0))
+                    );
+                }
+                setGrid(rows);
+                }}
+            >
+            Random
+            </button>
+            <button> Stuff </button>
+            <button>Something</button>
+        </ButtonsGrid>
+
+        <GridBackground>
         <div
             style={{
             display: "grid",
-            gridTemplateColumns: `repeat(${numCols}, 15px)`,
+            gridTemplateColumns: `repeat(${numCols}, 17px)`,
             border: "1px solid #111111",
-            marginTop: "2.5rem",
             }}
         >
             {grid.map((rows, i) =>
@@ -112,16 +129,17 @@ function Grid() {
                     setGrid(newGrid);
                 }}
                 style={{
-                    width: 15,
-                    height: 15,
-                    backgroundColor: grid[i][k] ? "pink" : undefined,
+                    width: 17,
+                    height: 17,
+                    backgroundColor: grid[i][k] ? "#CE6732" : undefined,
                     border: "solid 1px #555555",
                     borderRadius: "5px"
                 }}
                 />
             ))
             )}
-        </div>
+            </div>
+            </GridBackground>
 
             <Buttons>
                 <button
@@ -136,14 +154,14 @@ function Grid() {
                     {running ? "Stop" : "Start"}
                 </button>
                 <p>
-                    Generation:
+                Generation:
                 </p>
                 <button
                     onClick={() => {
                     setGrid(generateEmptyGrid());
                     }}
                 >
-                    Clear
+                    Reset
                 </button>
             </Buttons>
 
