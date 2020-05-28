@@ -25,6 +25,13 @@ function Inside(){
                     </button>
                     </Link>
                 </Buttons>
+                <Buttons className="back">
+                <Link to='/'>
+                    <button >
+                        Back
+                    </button>
+                    </Link>
+                </Buttons>
             </ContentContainer>
             </ContentBorder>
 

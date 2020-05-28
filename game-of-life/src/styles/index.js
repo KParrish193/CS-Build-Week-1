@@ -89,6 +89,12 @@ export const ContentBorder = styled.div`
             text-align: left;
             display: flex;
             justify-content: flex-end;
+            border: #A74104 solid 2px;
+
+            p {
+                padding: 1rem;
+                background-color: #EDFFED;
+            }
         }
 `
 
@@ -102,6 +108,12 @@ export const ContentContainer = styled.div`
     background-color: #EDFFED;
     border-radius: 10px;
     padding: 1.5rem 3rem;
+        
+    div.back {
+        justify-content: center;
+        margin-top: 0.5rem;
+        padding: 0;
+    }
 `
 
 export const GridBackground = styled.div`

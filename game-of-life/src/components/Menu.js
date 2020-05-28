@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Link } from 'react-router-dom'
 
-import { InsideContainer, ContentContainer, ContentBorder, MenuContent, Buttons } from '../styles/'
+import { InsideContainer, ContentContainer, ContentBorder, Buttons } from '../styles/'
 
 function Menu(){
 
