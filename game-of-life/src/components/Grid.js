@@ -50,6 +50,13 @@ function Grid() {
     const runningRef = useRef(running);
         runningRef.current = running;
 
+    // set generation state
+    const [generation, setGeneration] = useState(0);
+
+    // set generation reference for sim
+    const generationRef = useRef(generation);
+    generationRef.current = generation;
+
     // function for running simulation
     const runSimulation = useCallback(() => {
         if (!runningRef.current) {
@@ -79,7 +86,10 @@ function Grid() {
             });
         });
     
-        setTimeout(runSimulation, speedRef.current );
+        setTimeout(() => {
+            setGeneration(generationRef.current + 1)
+            runSimulation()
+        }, speedRef.current );
     }, []);
 
     return(
@@ -183,12 +193,15 @@ function Grid() {
                     {running ? "Stop" : "Start"}
                 </button>
                 <p>
-                Generation:
+                Generation: {generation}
                 </p>
                 <button
                     onClick={() => {
-                    setGrid(generateEmptyGrid());
+                    setSpeed(100)
+                    setGeneration(0)
+                    setGrid(generateEmptyGrid())
                     }}
+                    
                 >
                     Reset
                 </button>
